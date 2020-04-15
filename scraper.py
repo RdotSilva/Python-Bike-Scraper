@@ -36,5 +36,16 @@ class Scraper(object):
 
         # Cookie Accept Button. Must be clicked every time we load the page
         cookie_button = self.driver.find_element_by_class_name("crc_cookie_accept")
-
         cookie_button.click()
+
+        # Give list of selenium objects with class name of variant-option
+        bike_stock = self.driver.find_elements_by_class_name("variant-option")
+
+        # Locate bikes in stock
+        # This will return a list of the SIZES of bike that are in stock
+        # [M, L, XL]
+        in_stock = self.driver.find_elements_by_xpath(
+            "//div[@data-backorderable='true']"
+        )
+
+        print("Number of bikes in stock: ", len(in_stock))
