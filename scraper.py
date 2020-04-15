@@ -33,3 +33,8 @@ class Scraper(object):
             )
         except TimeoutException:
             print("Accept Cookie Button took too long to load")
+
+        # Cookie Accept Button. Must be clicked every time we load the page
+        cookie_button = self.driver.find_element_by_class_name("crc_cookie_accept")
+
+        cookie_button.click()
