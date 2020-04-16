@@ -4,12 +4,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from twilio.rest import Client
+
+from settings import to_number, from_number, twilio_sid, twilio_token
 
 
 class Scraper(object):
     def __init__(self):
         self.driver = webdriver.Chrome()
         self.delay = 3
+        self.client = Client(twilio_sid, twilio_token)
 
     # Loads the specified url.
     def load_crc_vrs_url(self, url):
@@ -49,3 +53,15 @@ class Scraper(object):
         )
 
         print("Number of bikes in stock: ", len(in_stock))
+
+        # Check bike stocks and email me if M in stock
+        for bike in in_stock:
+            print("Chain Reaction Stock Check: ")
+            print(bike.text + " size is in stock!")
+
+            if bike.text == "M":
+                self.client.messages.create(
+                    body=f"VRS Available https://www.chainreactioncycles.com/us/en/vitus-nucleus-29-vrs-bike-deore-1x10-2020/rp-prod181496",
+                    from_=from_number,
+                    to=to_number,
+                )
