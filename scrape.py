@@ -8,3 +8,4 @@ crc_vrs_scraper = Scraper()
 # Load crc vrs url and  check for stock
 crc_vrs_scraper.load_crc_vrs_url(crc_vrs_url)
 crc_vrs_scraper.check_stock_crc_vrs()
+crc_vrs_scraper.quit()
