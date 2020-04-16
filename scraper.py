@@ -65,3 +65,6 @@ class Scraper(object):
                     from_=from_number,
                     to=to_number,
                 )
+
+    def quit(self):
+        self.driver.close()
