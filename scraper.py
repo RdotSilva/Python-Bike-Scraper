@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options
 from twilio.rest import Client
 
 from settings import to_number, from_number, twilio_sid, twilio_token
@@ -11,7 +12,10 @@ from settings import to_number, from_number, twilio_sid, twilio_token
 
 class Scraper(object):
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        self.chrome_options = Options()
+        self.chrome_options.add_argument("--headless")
+        self.chrome_options.add_argument("--window-size=1920x1080")
+        self.driver = webdriver.Chrome(chrome_options=self.chrome_options)
         self.delay = 3
         self.client = Client(twilio_sid, twilio_token)
 
