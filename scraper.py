@@ -88,14 +88,27 @@ class Scraper(object):
         stock_dropdown = self.driver.find_element_by_class_name("select-size-label")
         self.driver.execute_script("arguments[0].scrollIntoView();", stock_dropdown)
 
-        dropdown_element = self.driver.find_element_by_xpath(
-            "//div[@data-colour='Military Green']"
-        )
+        try:
+            wait = WebDriverWait(self.driver, self.delay)
+            wait.until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//div[@data-colour='Military Green']")
+                )
+            ).click()
+        except TimeoutException:
+            print("Wait for dropdown to be clickable took too long")
 
-        # Click the option select dorpdown
-        dropdown_element.click()
+        try:
+            wait = WebDriverWait(self.driver, self.delay)
+            wait.until(
+                EC.presence_of_element_located((By.XPATH, "//li[@for='101794155']"))
+            )
+            print("Wiggle VRS Medium dropdown is ready!")
+            medium_bike = self.driver.find_element_by_xpath("//li[@for='101794155']")
+        except TimeoutException:
+            print("Wiggle VRS Page took too long to load...")
 
-        medium_bike = self.driver.find_element_by_xpath("//li[@for='101794155']")
+        # medium_bike = self.driver.find_element_by_xpath("//li[@for='101794155']")
 
         print("Checking Wiggle for stock... ")
 
