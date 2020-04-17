@@ -12,10 +12,11 @@ from settings import to_number, from_number, twilio_sid, twilio_token
 
 class Scraper(object):
     def __init__(self):
-        self.chrome_options = Options()
-        self.chrome_options.add_argument("--headless")
-        self.chrome_options.add_argument("--window-size=1920x1080")
-        self.driver = webdriver.Chrome(chrome_options=self.chrome_options)
+        # self.chrome_options = Options()
+        # self.chrome_options.add_argument("--headless")
+        # self.chrome_options.add_argument("--window-size=1920x1080")
+        # self.driver = webdriver.Chrome(chrome_options=self.chrome_options)
+        self.driver = webdriver.Chrome()
         self.delay = 3
         self.client = Client(twilio_sid, twilio_token)
 
