@@ -30,6 +30,18 @@ class Scraper(object):
         except TimeoutException:
             print("URL took too long to load")
 
+    # Loads the url for Wiggle VRS
+    def load_url_wiggle_vrs(self, url):
+        self.driver.get(url)
+        try:
+            wait = WebDriverWait(self.driver, self.delay)
+            wait.until(
+                EC.presence_of_element_located((By.CLASS_NAME, "js-addToBasket"))
+            )
+            print("Wiggle VRS Page READY")
+        except TimeoutException:
+            print("Wiggle VRS Page took too long to load...")
+
     # Check the page to see if the bike is in stock
     def check_stock_crc_vrs(self):
         # Wait for Accept Cookie Button to be present. Without clicking this button you can't scrape the page.
