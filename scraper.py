@@ -83,5 +83,10 @@ class Scraper(object):
                     to=to_number,
                 )
 
+    def check_stock_wiggle_vrs(self):
+        # Find the "select size" dropdown and scroll it into view
+        stock_dropdown = self.driver.find_element_by_class_name("select-size-label")
+        self.driver.execute_script("arguments[0].scrollIntoView();", stock_dropdown)
+
     def quit(self):
         self.driver.close()
