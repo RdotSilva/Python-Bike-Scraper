@@ -119,5 +119,8 @@ dmypy.json
 # Sensitive Settings file
 settings.py
 
+# Autorun batch file
+autorun.bat
+
 venv
 geckodriver.log
