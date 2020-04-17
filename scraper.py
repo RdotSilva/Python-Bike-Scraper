@@ -95,5 +95,12 @@ class Scraper(object):
         # Click the option select dorpdown
         dropdown_element.click()
 
+        medium_bike = self.driver.find_element_by_xpath("//li[@for='101794155']")
+
+        print("Checking Wiggle for stock... ")
+
+        # Parse the text to make bike stock searchable
+        medium_bike_split_text = medium_bike.text.split("$749.99")
+
     def quit(self):
         self.driver.close()
