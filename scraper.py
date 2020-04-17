@@ -88,5 +88,12 @@ class Scraper(object):
         stock_dropdown = self.driver.find_element_by_class_name("select-size-label")
         self.driver.execute_script("arguments[0].scrollIntoView();", stock_dropdown)
 
+        dropdown_element = self.driver.find_element_by_xpath(
+            "//div[@data-colour='Military Green']"
+        )
+
+        # Click the option select dorpdown
+        dropdown_element.click()
+
     def quit(self):
         self.driver.close()
