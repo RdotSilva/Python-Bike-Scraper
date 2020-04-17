@@ -102,5 +102,16 @@ class Scraper(object):
         # Parse the text to make bike stock searchable
         medium_bike_split_text = medium_bike.text.split("$749.99")
 
+        # Check the parsed text to see if bike is in stock
+        # If bike in stock send text message
+        if medium_bike_split_text[1].strip() == "Currently out of stock":
+            print("Wiggle VRS out of stock")
+        else:
+            self.client.messages.create(
+                body="VRS Available @ https://www.wiggle.com/vitus-nucleus-29-vrs-bike-deore-1x10-2020",
+                from_=from_number,
+                to=to_number,
+            )
+
     def quit(self):
         self.driver.close()
