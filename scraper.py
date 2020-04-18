@@ -81,9 +81,23 @@ class Scraper(object):
                     body=f"VRS Available https://www.chainreactioncycles.com/us/en/vitus-nucleus-29-vrs-bike-deore-1x10-2020/rp-prod181496",
                     from_=from_number,
                     to=to_number,
-               )
+                )
+
     # Check CRC for VR stock
     def check_stock_crc_vr(self):
+        # Wait for Accept Cookie Button to be present. Without clicking this button you can't scrape the page.
+        # This button will pop up every time we reload the page.
+        try:
+            wait = WebDriverWait(self.driver, self.delay)
+            wait.until(
+                EC.presence_of_element_located((By.CLASS_NAME, "crc_accept_cookie"))
+            )
+        except TimeoutException:
+            print("Accept Cookie Button took too long to load")
+
+        # Cookie Accept Button. Must be clicked every time we load the page
+        cookie_button = self.driver.find_element_by_class_name("crc_cookie_accept")
+        cookie_button.click()
 
 
     def check_stock_wiggle_vrs(self):
