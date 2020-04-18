@@ -81,7 +81,10 @@ class Scraper(object):
                     body=f"VRS Available https://www.chainreactioncycles.com/us/en/vitus-nucleus-29-vrs-bike-deore-1x10-2020/rp-prod181496",
                     from_=from_number,
                     to=to_number,
-                )
+               )
+    # Check CRC for VR stock
+    def check_stock_crc_vr(self):
+
 
     def check_stock_wiggle_vrs(self):
         # Find the "select size" dropdown and scroll it into view
