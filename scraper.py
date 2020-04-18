@@ -111,6 +111,18 @@ class Scraper(object):
 
         print("Number of bikes in stock: ", len(in_stock))
 
+        # Check bike stocks and email me if M in stock
+        for bike in in_stock:
+            print("Chain Reaction VR Stock Check: ")
+            print(bike.text + " size is in stock!")
+
+            if bike.text == "M":
+                self.client.messages.create(
+                    body=f"VR Available https://www.chainreactioncycles.com/us/en/vitus-nucleus-29-vr-bike-altus-2x9-2020/rp-prod181494",
+                    from_=from_number,
+                    to=to_number,
+                )
+
     def check_stock_wiggle_vrs(self):
         # Find the "select size" dropdown and scroll it into view
         stock_dropdown = self.driver.find_element_by_class_name("select-size-label")
